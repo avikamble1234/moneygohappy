@@ -5,6 +5,8 @@ var FoodGroup, obstacleGroup;
 var score;
 var ground;
 
+
+
 var survivalTime=0;
 
 
@@ -23,6 +25,9 @@ function preload(){
 
 function setup() {
    createCanvas(600, 400);
+
+   bananaGroup=createGroup();
+   stoneGroup=createGroup();
   
   monkey=createSprite(80,315,20,20)
   monkey.addAnimation("moving",monkey_running);
@@ -39,7 +44,11 @@ function setup() {
 
 function draw() {
     background(225);
+
+    spawnObstace()
   
+    spawnBanana()
+
   if (ground.x<0){
       ground.x=ground.width/2;
       }
@@ -62,7 +71,7 @@ function draw() {
   stroke("black");
   textSize(20);
   fill("black");
-  survivalTime=Math.ceil(framecount/frameRate())
+  survivalTime=Math.ceil(frameCount/frameRate())
   text("survival Time: "+survivalTime,100,50);
 }
  
@@ -70,10 +79,10 @@ function draw() {
 function spawnBanana() {
   
   if (frameCount % 60 === 0) {
-    var banana = createSprite(600,300,40,10);
+    var banana = createSprite(600,200,40,10);
     banana.addImage(bananaImage)
-    banana.y = Math.round(random(280,320))
-    banana.scale = 0.4;
+    banana.y = Math.round(random(150,200))
+    banana.scale = 0.1;
     banana.velocityX = -3;
     
     //assign lifetime to the variable
@@ -90,18 +99,18 @@ function spawnBanana() {
 
 function spawnObstace() {
   
-  if (frameCount % 60 === 0) {
-    var Stone = createSprite(600,300,40,10);
+  if (frameCount % 100 === 0) {
+    var obstace = createSprite(600,340,40,10);
     obstace.addImage(obstaceImage)
-    obstace.y = Math.round(random(220,320))
-    obstace.scale = 0.4;
+   
+    obstace.scale = 0.1;
     obstace.velocityX = -3;
     
     //assign lifetime to the variable
     obstace.lifetime = 134;
 
     
-    stoneGroup.add(stone);
+    stoneGroup.add(obstace);
     }
  }
 
